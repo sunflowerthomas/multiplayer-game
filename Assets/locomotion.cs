@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class locomotion : MonoBehaviour
 {
-    private CharacterController controller;
+    public CharacterController controller;
     private Vector3 playerVelocity;
     private bool groundedPlayer;
     public float playerSpeed = 2.0f;
@@ -13,7 +13,7 @@ public class locomotion : MonoBehaviour
 
     private void Start()
     {
-        controller = gameObject.AddComponent<CharacterController>();
+
     }
 
     void Update()
