@@ -10,6 +10,7 @@ public class locomotion : MonoBehaviour
     public float playerSpeed = 2.0f;
     public float jumpHeight = 1.0f;
     public float gravityValue = -9.81f;
+    public float rotationSpeed = 10.0f; // Add this for rotation smoothness
 
     private void Start()
     {
@@ -28,9 +29,11 @@ public class locomotion : MonoBehaviour
         Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
         move = Vector3.ClampMagnitude(move, 1f); // Optional: prevents faster diagonal movement
 
+        // Smoothly rotate towards movement direction
         if (move != Vector3.zero)
         {
-            transform.forward = move;
+            Quaternion toRotation = Quaternion.LookRotation(move, Vector3.up);
+            transform.rotation = Quaternion.Slerp(transform.rotation, toRotation, rotationSpeed * Time.deltaTime);
         }
 
         // Jump
